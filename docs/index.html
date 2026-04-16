@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⚛️ Atom — The AI Systems Language</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #00d4ff;
+        }
+        
+        .github-btn {
+            background: #fff;
+            color: #0a0a0a !important;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        .github-btn:hover {
+            background: #00d4ff;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%);
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero .tagline {
+            font-size: 1.4rem;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+        
+        .hero .features {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .feature-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            border-color: #00d4ff;
+            color: #00d4ff;
+        }
+        
+        .code-preview {
+            background: #1e1e2e;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 3rem 1rem;
+            max-width: 800px;
+            text-align: left;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .code-preview pre {
+            margin: 0;
+            overflow-x: auto;
+        }
+        
+        .code-preview code {
+            color: #a6e22e;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .code-preview .keyword {
+            color: #f92672;
+        }
+        
+        .code-preview .string {
+            color: #e6db74;
+        }
+        
+        .code-preview .comment {
+            color: #75715e;
+        }
+        
+        .code-preview .function {
+            color: #66d9ef;
+        }
+        
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #00d4ff, #7b2cbf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #00d4ff;
+        }
+        
+        .feature-card p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        .install-section {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .install-command {
+            background: #1e1e2e;
+            padding: 1rem 2rem;
+            border-radius: 10px;
+            display: inline-block;
+            margin: 1rem 0;
+            font-family: monospace;
+            font-size: 1.2rem;
+            color: #a6e22e;
+        }
+        
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .example-card {
+            background: #1e1e2e;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .example-header {
+            background: #2d2d3d;
+            padding: 0.75rem 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .example-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        .dot-red { background: #ff5f56; }
+        .dot-yellow { background: #ffbd2e; }
+        .dot-green { background: #27c93f; }
+        
+        .example-content {
+            padding: 1.5rem;
+        }
+        
+        .example-content pre {
+            margin: 0;
+            overflow-x: auto;
+        }
+        
+        .example-content code {
+            color: #a6e22e;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(0, 0, 0, 0.5);
+            color: #888;
+        }
+        
+        footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero .tagline {
+                font-size: 1.1rem;
+            }
+            
+            nav {
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            section {
+                padding: 3rem 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            ⚛️ Atom
+        </div>
+        <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#install">Install</a>
+            <a href="#examples">Examples</a>
+            <a href="https://github.com/Mharshith548/atom" class="github-btn">GitHub</a>
+        </div>
+    </nav>
+    
+    <div class="hero">
+        <h1>⚛️ Atom</h1>
+        <div class="tagline">The AI Systems Language</div>
+        <div class="features">
+            <span class="feature-badge">🐍 Python Syntax</span>
+            <span class="feature-badge">⚡ Native Speed</span>
+            <span class="feature-badge">🌐 WebAssembly</span>
+            <span class="feature-badge">🤖 AI Built-in</span>
+        </div>
+        <div class="cta-buttons">
+            <a href="#install" class="btn btn-primary">Get Started</a>
+            <a href="https://github.com/Mharshith548/atom" class="btn btn-secondary">View on GitHub</a>
+        </div>
+        
+        <div class="code-preview">
+            <pre><code><span class="comment"># Simple and powerful</span>
+<span class="keyword">import</span> ai
+
+<span class="keyword">let</span> model = ai.load(<span class="string">"tinyllm"</span>)
+<span class="keyword">let</span> reply = model.ask(<span class="string">"What is Atom?"</span>)
+
+<span class="function">print</span>(reply)</code></pre>
+        </div>
+    </div>
+    
+    <section id="features">
+        <h2 class="section-title">Why Atom?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>🐍 Python-Like Syntax</h3>
+                <p>Clean, readable, and intuitive. If you know Python, you already know Atom.</p>
+            </div>
+            <div class="feature-card">
+                <h3>⚡ Native Performance</h3>
+                <p>Compiles to machine code via C. Fast startup, small binaries, no runtime overhead.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🌐 WebAssembly Ready</h3>
+                <p>Deploy anywhere: browsers, edge computing, serverless, or embedded devices.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🤖 AI Built-in</h3>
+                <p>TinyLLM included. Support for LLaMA.cpp and ONNX runtime.</p>
+            </div>
+            <div class="feature-card">
+                <h3>📦 Package Manager</h3>
+                <p>Simple dependency management. `atom add http` installs packages instantly.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🌍 Web Server</h3>
+                <p>Built-in HTTP server with routing, middleware, and static file support.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="install">
+        <div class="install-section">
+            <h2 class="section-title" style="margin-bottom: 1rem;">Install Atom</h2>
+            <p style="margin-bottom: 1.5rem; font-size: 1.2rem;">Clone the repository and start coding in seconds</p>
+            <div class="install-command">
+                git clone https://github.com/Mharshith548/atom.git
+            </div>
+            <p style="margin: 1rem 0;">Then run:</p>
+            <div class="install-command">
+                cd atom && python atom.py repl
+            </div>
+            <p style="margin-top: 2rem; color: #888;">No dependencies required! Works on Python 3.8+</p>
+        </div>
+    </section>
+    
+    <section id="examples">
+        <h2 class="section-title">Code Examples</h2>
+        <div class="example-grid">
+            <div class="example-card">
+                <div class="example-header">
+                    <span class="example-dot dot-red"></span>
+                    <span class="example-dot dot-yellow"></span>
+                    <span class="example-dot dot-green"></span>
+                    <span style="margin-left: auto; color: #888;">hello.atom</span>
+                </div>
+                <div class="example-content">
+                    <pre><code><span class="comment"># Hello World</span>
+<span class="function">print</span>(<span class="string">"Hello from Atom!"</span>)
+<span class="function">print</span>(<span class="string">"Welcome to the AI Systems Language"</span>)</code></pre>
+                </div>
+            </div>
+            
+            <div class="example-card">
+                <div class="example-header">
+                    <span class="example-dot dot-red"></span>
+                    <span class="example-dot dot-yellow"></span>
+                    <span class="example-dot dot-green"></span>
+                    <span style="margin-left: auto; color: #888;">chatbot.atom</span>
+                </div>
+                <div class="example-content">
+                    <pre><code><span class="comment"># AI Chatbot</span>
+<span class="keyword">import</span> ai
+
+<span class="keyword">let</span> model = ai.load(<span class="string">"tinyllm"</span>)
+
+<span class="keyword">while</span> true:
+    <span class="keyword">let</span> user = input(<span class="string">"You: "</span>)
+    <span class="keyword">if</span> user == <span class="string">"quit"</span>:
+        <span class="keyword">break</span>
+    <span class="function">print</span>(<span class="string">"Bot: "</span> + model.ask(user))</code></pre>
+                </div>
+            </div>
+            
+            <div class="example-card">
+                <div class="example-header">
+                    <span class="example-dot dot-red"></span>
+                    <span class="example-dot dot-yellow"></span>
+                    <span class="example-dot dot-green"></span>
+                    <span style="margin-left: auto; color: #888;">server.atom</span>
+                </div>
+                <div class="example-content">
+                    <pre><code><span class="comment"># Web Server</span>
+<span class="keyword">import</span> http
+
+<span class="keyword">let</span> server = http.Server(<span class="string">8080</span>)
+
+server.route(<span class="string">"/"</span>, <span class="keyword">fn</span>(req):
+    <span class="keyword">return</span> {<span class="string">"status"</span>: <span class="string">200</span>, <span class="string">"body"</span>: <span class="string">"Hello!"</span>}
+)
+
+server.start()</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>⚛️ Atom — The AI Systems Language</p>
+        <p style="margin-top: 1rem;">
+            <a href="https://github.com/Mharshith548/atom">GitHub</a> · 
+            <a href="https://github.com/Mharshith548/atom/blob/main/LICENSE">MIT License</a>
+        </p>
+        <p style="margin-top: 2rem; font-size: 0.9rem;">© 2024 Mharshith548. Built with ❤️ for the AI era.</p>
+    </footer>
+</body>
+              </html>
