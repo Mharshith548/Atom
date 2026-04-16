@@ -35,7 +35,7 @@ print(reply)
 
 
 # Clone the repo
-git clone https://github.com/YOUR_USERNAME/atom.git
+git clone https://github.com/Mharshith548/atom.git
 cd atom
 
 # Start REPL
