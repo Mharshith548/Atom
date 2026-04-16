@@ -30,3 +30,46 @@ let model = ai.load("tinyllm")
 let reply = model.ask("What is Atom?")
 
 print(reply)
+
+⚡ Quick Start
+
+
+# Clone the repo
+git clone https://github.com/YOUR_USERNAME/atom.git
+cd atom
+
+# Start REPL
+python atom.py repl
+
+# Run example
+python atom.py run examples/hello.atom
+
+# Create project
+python atom.py new myapp
+
+📦 Features
+
+Feature	Description
+🐍 Python Syntax	Clean, indentation-based
+⚡ Native Speed	Compiles to C then native
+🌐 WASM Support	Deploy anywhere
+🤖 AI Built-in	TinyLLM included
+📦 Package Manager	atom add http
+🌍 Web Server	Built-in HTTP server
+
+📖 Examples
+
+Hello World
+atom
+print("Hello from Atom!")
+AI Chatbot
+atom
+import ai
+let model = ai.load("tinyllm")
+print(model.ask("Hello!"))
+Web Server
+atom
+import http
+let server = http.Server(8080)
+server.route("/", fn(req): return "Hello World!")
+server.start()
