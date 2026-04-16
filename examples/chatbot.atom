@@ -1,0 +1,17 @@
+# Simple AI Chatbot
+import ai
+
+print("🤖 Atom AI Chatbot")
+print("Type 'quit' to exit")
+print()
+
+let model = ai.load("tinyllm")
+
+while true:
+    let user = input("You: ")
+    if user == "quit":
+        print("Goodbye!")
+        break
+    let reply = model.ask(user)
+    print("Bot: " + reply)
+    print()
