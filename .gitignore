@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Atom
+.atom/
+*.wasm
+*.o
+*.out
+
+# IDE
+.vscode/
+.idea/
+.DS_Store
+
+# Secrets
+.env
