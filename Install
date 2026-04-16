@@ -1,0 +1,4 @@
+pip install atom-lang
+
+# With AI support
+pip install atom-lang[ai]
