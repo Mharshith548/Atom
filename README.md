@@ -14,6 +14,10 @@
 
 ---
 
+## 🌐 Website
+
+Visit the official website: **[atom-lang.github.io](https://mharshith548.github.io/atom/)**
+
 ## 🚀 What is Atom?
 
 Atom is a modern programming language that combines:
