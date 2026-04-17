@@ -16,7 +16,7 @@
 
 ## 🌐 Website
 
-Visit the official website: **[atom-lang.github.io](https://mharshith548.github.io/atom/)**
+Visit the official website: **[atom-lang.github.io](https://mharshith548.github.io/Atom/)**
 
 ## 🚀 What is Atom?
 
